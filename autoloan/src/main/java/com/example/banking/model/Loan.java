@@ -9,8 +9,6 @@ import java.util.Objects;
 @Entity(name = "Loan")
 public class Loan {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,6 +16,9 @@ public class Loan {
     private Double balance;
 
     private Long clientId;
+
+    public Loan() {
+    }
 
     public Long getId() {
         return id;
@@ -54,16 +55,60 @@ public class Loan {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Loan)) return false;
         Loan loan = (Loan) o;
-        return Objects.equals(getId(), loan.getId()) &&
-                Objects.equals(getName(), loan.getName()) &&
-                Objects.equals(getBalance(), loan.getBalance()) &&
-                Objects.equals(getClientId(), loan.getClientId());
+        return Objects.equals(id, loan.id) &&
+                Objects.equals(name, loan.name) &&
+                Objects.equals(balance, loan.balance) &&
+                Objects.equals(clientId, loan.clientId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getBalance(), getClientId());
+    }
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                ", clientId=" + clientId +
+                '}';
+    }
+
+    public static AutoLoanBuilder builder(){
+
+        return new AutoLoanBuilder();
+    }
+
+    public static final class AutoLoanBuilder{
+
+        private Loan loan;
+
+        private AutoLoanBuilder(){
+
+            loan = new Loan();
+        }
+
+        public AutoLoanBuilder withClientId(Long clientId){
+            loan.setClientId(clientId);
+            return this;
+        }
+
+        public AutoLoanBuilder withName(String name){
+            loan.setName(name);
+            return this;
+        }
+
+        public AutoLoanBuilder withBalance(Double balance){
+            loan.setBalance(balance);
+            return this;
+        }
+
+        public Loan build(){
+            return loan;
+        }
     }
 }

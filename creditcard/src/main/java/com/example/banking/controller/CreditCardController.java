@@ -1,19 +1,21 @@
 package com.example.banking.controller;
-import com.example.banking.model.Loan;
-import com.example.banking.service.LoanService;
-import org.springframework.web.bind.annotation.*;
+
+import com.example.banking.model.Credit;
+import com.example.banking.service.CreditService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("loan")
-public class AutoloanController implements BasicController<Loan> {
+@RequestMapping("credit")
+public class CreditCardController implements BasicController<Credit> {
 
-    private LoanService loanService;
+    private CreditService loanService;
 
-    public AutoloanController(LoanService loanService) {
+    public CreditCardController(CreditService creditService) {
 
-        this.loanService = loanService;
+        this.creditService = creditService;
     }
 
     @Override
@@ -58,4 +60,6 @@ public class AutoloanController implements BasicController<Loan> {
         return loans;
 
     }
+
+
 }

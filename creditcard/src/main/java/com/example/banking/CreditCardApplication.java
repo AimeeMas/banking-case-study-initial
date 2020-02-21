@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CreditCardApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(CreditCardApplication.class, args);
     }
 
