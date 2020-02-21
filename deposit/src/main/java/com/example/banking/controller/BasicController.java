@@ -8,7 +8,7 @@ public interface BasicController<T> {
 
     T get(Long id);
 
-    T modify(T t);
+    T update(T t);
 
     boolean delete(T t);
 

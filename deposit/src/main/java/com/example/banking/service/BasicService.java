@@ -1,8 +1,8 @@
-package com.example.banking.controller;
+package com.example.banking.service;
 
 import java.util.List;
 
-public interface BasicController<T> {
+public interface BasicService<T> {
 
     T add(T t);
 
@@ -13,5 +13,4 @@ public interface BasicController<T> {
     boolean delete(T t);
 
     List<T> getAll();
-
 }

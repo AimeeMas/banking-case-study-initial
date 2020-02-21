@@ -2,8 +2,7 @@ package com.example.banking.controller;
 
 import com.example.banking.model.Credit;
 import com.example.banking.service.CreditService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
 @RequestMapping("credit")
 public class CreditCardController implements BasicController<Credit> {
 
-    private CreditService loanService;
+    private CreditService creditService;
 
     public CreditCardController(CreditService creditService) {
 
@@ -19,45 +18,45 @@ public class CreditCardController implements BasicController<Credit> {
     }
 
     @Override
-    @PostMapping(value = "createLoan", produces = "application/json")
-    public Loan add(@RequestBody Loan loan) {
+    @PostMapping(value = "createCredit", produces = "application/json")
+    public Credit add(@RequestBody Credit credit) {
 
-        return this.loanService.add(loan);
+        return this.creditService.add(credit);
     }
 
     @Override
-    @GetMapping(value = "getLoanById/{id}", produces = "application/json")
-    public Loan get(@PathVariable("id") Long id) {
-        Loan loan = this.loanService.get(id);
+    @GetMapping(value = "getCreditById/{id}", produces = "application/json")
+    public Credit get(@PathVariable("id") Long id) {
+        Credit credit = this.creditService.get(id);
 
-        return loan;
+        return credit;
     }
 
     @Override
-    @PutMapping(value = "updateLoan", produces = "application/json")
-    public Loan modify(@RequestBody Loan loan) {
+    @PutMapping(value = "updateCredit", produces = "application/json")
+    public Credit update(@RequestBody Credit credit) {
 
-        return this.loanService.update(loan);
+        return this.creditService.update(credit);
     }
 
     @Override
-    @DeleteMapping(value = "deleteLoan", produces = "application/json")
-    public boolean delete(@RequestBody Loan loan) {
+    @DeleteMapping(value = "deleteCredit", produces = "application/json")
+    public boolean delete(@RequestBody Credit credit) {
 
-        return this.loanService.delete(loan);
+        return this.creditService.delete(credit);
     }
 
     @GetMapping("getLoansByClientId")
-    public List<Loan> getLoansByClientId(@RequestBody Long clientId) {
-        return this.loanService.getLoanByClientId(clientId);
+    public List<Credit> getCreditByClientId(@RequestBody Long clientId) {
+        return this.creditService.getCreditByClientId(clientId);
     }
 
     @Override
-    @GetMapping(value = "getAllLoans", produces = "application/json")
-    public List<Loan> getAll() {
+    @GetMapping(value = "getAllCredit", produces = "application/json")
+    public List<Credit> getAll() {
 
-        List<Loan> loans = this.loanService.getAll();
-        return loans;
+        List<Credit> credit = this.creditService.getAll();
+        return credit;
 
     }
 

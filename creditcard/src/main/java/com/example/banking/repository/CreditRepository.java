@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CreditRepository extends CrudRepository<Credit, Long> {
 
-    List<Credit> findCreditByClientId(Long Clientid);
+    List<Credit> findCreditByClientId(Long clientId);
 }

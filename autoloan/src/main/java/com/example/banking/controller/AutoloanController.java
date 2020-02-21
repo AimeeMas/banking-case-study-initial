@@ -1,13 +1,15 @@
 package com.example.banking.controller;
 import com.example.banking.model.Loan;
 import com.example.banking.service.LoanService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("loan")
-public class AutoloanController implements BasicController<Loan> {
+@RequestMapping("/autoloan/createLoan")
+public class AutoloanController {
 
     private LoanService loanService;
 
@@ -16,14 +18,13 @@ public class AutoloanController implements BasicController<Loan> {
         this.loanService = loanService;
     }
 
-    @Override
-    @PostMapping(value = "createLoan", produces = "application/json")
+
+    @PostMapping(value = "autoloan/createLoan", produces = "application/json")
     public Loan add(@RequestBody Loan loan) {
 
         return this.loanService.add(loan);
     }
 
-    @Override
     @GetMapping(value = "getLoanById/{id}", produces = "application/json")
     public Loan get(@PathVariable("id") Long id) {
         Loan loan = this.loanService.get(id);
@@ -31,18 +32,29 @@ public class AutoloanController implements BasicController<Loan> {
         return loan;
     }
 
-    @Override
     @PutMapping(value = "updateLoan", produces = "application/json")
-    public Loan modify(@RequestBody Loan loan) {
+    public Loan update(@RequestBody Loan loan) {
 
         return this.loanService.update(loan);
     }
 
-    @Override
-    @DeleteMapping(value = "deleteLoan", produces = "application/json")
-    public boolean delete(@RequestBody Loan loan) {
+    @DeleteMapping(value = "autoloan/deleteLoan/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
 
-        return this.loanService.delete(loan);
+        Boolean success = this.loanService.delete(get(id));
+        HttpStatus status;
+        String message = "";
+
+        if(success) {
+            status = HttpStatus.NO_CONTENT;
+            message = "Successfully deleted.";
+        } else {
+            status = HttpStatus.NOT_FOUND;
+            message = "No accounts available to show currently.";
+        }
+
+        return new ResponseEntity(message, status);
+
     }
 
     @GetMapping("getLoansByClientId")
@@ -50,7 +62,6 @@ public class AutoloanController implements BasicController<Loan> {
         return this.loanService.getLoanByClientId(clientId);
     }
 
-    @Override
     @GetMapping(value = "getAllLoans", produces = "application/json")
     public List<Loan> getAll() {
 

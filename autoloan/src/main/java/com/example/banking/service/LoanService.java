@@ -19,7 +19,13 @@ public class LoanService implements BasicService<Loan> {
     @Override
     public Loan add(Loan loan) {
 
-        return this.loanRepository.save(loan);
+        Loan newLoan = Loan.builder()
+                .withClientId(loan.getClientId())
+                .withName(loan.getName())
+                .withBalance(loan.getBalance())
+                .build();
+
+        return this.loanRepository.save(newLoan);
     }
 
     @Override

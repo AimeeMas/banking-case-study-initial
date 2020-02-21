@@ -108,6 +108,7 @@ public class Loan {
         }
 
         public Loan build(){
+
             return loan;
         }
     }
