@@ -1,4 +1,6 @@
 # Banking Case Study
+* Aimee Mascorro 2000583
+* I couldn't figure out why it wouldn't give me the responses even though they were there and I followed the tutorials as much as I could.
 
 You're going to create a banking application.  The banking application has the following lines of business (LoBs):
 

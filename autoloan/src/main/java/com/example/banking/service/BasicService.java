@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BasicService<T> {
 
-    T add(T t);
+    boolean add(T t);
 
     T get(Long id);
 

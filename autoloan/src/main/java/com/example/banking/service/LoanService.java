@@ -17,15 +17,17 @@ public class LoanService implements BasicService<Loan> {
     }
 
     @Override
-    public Loan add(Loan loan) {
+    public boolean add(Loan loan) {
 
-        Loan newLoan = Loan.builder()
-                .withClientId(loan.getClientId())
-                .withName(loan.getName())
-                .withBalance(loan.getBalance())
-                .build();
+        boolean success = true;
 
-        return this.loanRepository.save(newLoan);
+        try{
+            this.loanRepository.save(loan);
+        } catch (Exception ex){
+            success = false;
+        }
+        return success;
+
     }
 
     @Override
